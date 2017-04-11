@@ -23,6 +23,10 @@ The original dataset included the following data files:
 
 
 ## Description of run_analysis.R
+
+__Attention!__ 
+For the code to work properly the data files have to be downloaded and unziped and the working directory has to be set to the file where the unzipped textfiles are stored!
+
 The goal of the run_analysis.R script is to produce a tidy data set which can be used for further analysis. It therefore reads in data from a number of given .txt files and merges the resulting tables into one big data table.
 * First all the text-files are read into individual tables.
 * The test-data and the train-data where then merged into two seperate tables and labeled accordingly (the text-files “activity_labels.txt” and “features.txt” where used to label activities and features).
