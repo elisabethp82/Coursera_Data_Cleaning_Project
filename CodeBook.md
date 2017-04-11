@@ -2,14 +2,14 @@
 The raw data was provided bei the University of California and can be downloaded from the following address: [https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
 The original dataset included the following files:
-“README.txt”
-“features_info.txt”: Shows information about the variables used on the feature vector.
-“features.txt”: List of all features.
-“activity_labels.txt”: Links the class labels with their activity name.
-“train/X_train.txt”: Training set.
-“train/y_train.txt”: Training labels.
-”test/X_test.txt”: Test set.
-“test/y_test.txt”: Test labels.
+* “README.txt”
+* “features_info.txt”: Shows information about the variables used on the feature vector.
+* “features.txt”: List of all features.
+* “activity_labels.txt”: Links the class labels with their activity name.
+* “train/X_train.txt”: Training set.
+* “train/y_train.txt”: Training labels.
+* ”test/X_test.txt”: Test set.
+* “test/y_test.txt”: Test labels.
 
 It was processed using RStudio Version 1.0.136. The final tidy data set can be found in this repository ("tidy_data.txt"). 
 
@@ -35,13 +35,15 @@ The final tidy data file contains the following variables:
 ## Identifiers
 * subject_ids --> ID of the test subject
 * activity_ids  --> IDs of the type of activity that was performed by the subject during the experiment
-* activity_labels --> Label of the activity
-    (1) WALKING 
-    (2) WALKING_UPSTAIRS
-    (3) WALKING_DOWNSTAIRS
-    (4) SITTING (value 4)
-    (5) STANDING (value 5)
-    (6) LAYING (value 6)
+
+## Activity Labels
+activity_labels
+* (1) WALKING 
+* (2) WALKING_UPSTAIRS
+* (3) WALKING_DOWNSTAIRS
+* (4) SITTING
+* (5) STANDING
+* (6) LAYING
 
 ## Measurments
 * tBodyAccmeanX
