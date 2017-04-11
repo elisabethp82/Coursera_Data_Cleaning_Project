@@ -1,82 +1,106 @@
-#clearing space
-rm(list=ls())
 
-#installing necessary packages
-install.packages("reshape2")
+##############################################
+## installing and loading necessary package ##
+##############################################
 
-#loading packages
+if("reshape2" %in% rownames(installed.packages()) == FALSE) {
+        install.packages("reshape2")
+}
 library(reshape2)
 
-# First all the textfiles are loaded as individual tables and saved into seperate variables
+############################################################################
+## First all the textfiles are loaded as individual tables and saved into ##
+## seperate variables.                                                    ##
+############################################################################
 
-## reading file "activity_labels.txt" into a table and saving it in new variable "activities".
+# Reading file "activity_labels.txt" into a table and saving it in new variable "activities".
 activities <- read.table("./activity_labels.txt", col.names = c("activity_ids", "activity_labels"))
 
-## reading file "features.txt" into a table and saving it in new variable "features".
+# Reading file "features.txt" into a table and saving it in new variable "features".
 features <- read.table("./features.txt")
 
-
-# Reading in the test data and labeling the columns
-
-## reading file "X_test.txt" from the testdata folder into a table and saving it in new variable "test_data"
-## simultaniously using "features" variable for labeling the coloumn names of test_data
+# Reading file "X_test.txt" from the testdata folder into a table and saving it in new variable "test_data" 
+# and simultaniously using the "features" variable for creating the column names of test_data.
 test_data <- read.table("./test/X_test.txt", col.names = (features[,2]))
 
-## reading file "y_test.txt" from the testdata folder into table and saving it in new variable "acitivity_ids_test"
-## setting the column name to "activity_id"
-activity_ids_test <- read.table("./test/y_test.txt", col.names = "activity_id")
+# Reading file "y_test.txt" from the testdata folder into a new table and saving it in new variable "acitivity_ids_test".
+# Setting the column name to "activity_ids".
+activity_ids_test <- read.table("./test/y_test.txt", col.names = "activity_ids")
 
-## reading file "subject_test.txt" from the testdata folder into table and saving it in new variable "subjet_ids_test"
-## setting the column name to "subject_id"
-subject_ids_test <- read.table("./test/subject_test.txt", col.names = "subject_id")
+# Reading file "subject_test.txt" from the testdata folder into a new table and saving it in new variable "subjet_ids_test".
+# Setting the column name to "subject_ids".
+subject_ids_test <- read.table("./test/subject_test.txt", col.names = "subject_ids")
 
-## combining the testdata file with the test subject ids and test activity ids
+# Combining the testdata file with the test subject ids and test activity ids.
 testdata_final <- cbind(subject_ids_test, activity_ids_test, test_data)
 
-
-# Reading in the training data and labeling the columns
-
-## reading file "X_train.txt" from the traindata folder into a table and saving it in new variable "train_data"
-## simultaniously using "features" variable for labeling the coloumn names of test_data
+# Reading file "X_train.txt" from the traindata folder into a table and saving it in new variable "train_data"
+# and simultaniously using "features" variable for creating the coloumn names of train_data.
 train_data <- read.table("./train/X_train.txt", col.names = (features[,2]))
 
-## reading file "y_train.txt" from the traindata folder into table and saving it in new variable "acitivity_ids_train"
-## setting the column name to "activity_id"
-activity_ids_train <- read.table("./train/y_train.txt", col.names = "activity_id")
+# Reading file "y_train.txt" from the traindata folder into table and saving it in new variable "acitivity_ids_train".
+# Setting the column name to "activity_ids"
+activity_ids_train <- read.table("./train/y_train.txt", col.names = "activity_ids")
 
 ## reading file "subject_train.txt" from the traindata folder into table and saving it in new variable "subjet_ids_train"
-## setting the column name to "subject_id"
-subject_ids_train <- read.table("./train/subject_train.txt", col.names = "subject_id")
+## setting the column name to "subject_ids"
+subject_ids_train <- read.table("./train/subject_train.txt", col.names = "subject_ids")
 
-## combining the traindata file with the train subject ids and train activity ids
+# Combining the traindata file with the train subject ids and train activity ids
 traindata_final <- cbind(subject_ids_train, activity_ids_train, train_data)
 
-## combining final testdata file and final traindata file into one datatable
+# Combining final testdata file and final traindata file into one datatable.
 data_final <- rbind(testdata_final, traindata_final)
 
-# choosing only those columns which contain mean or standard deviation
-## storing the column names in the variable "colnames_data_final"
+#######################################################################################
+## Next only those columns which contain means or standard deviations are extracted. ##
+#######################################################################################
+
+# Storing the column names in the variable "colnames_data_final".
 colnames_data_final <- names(data_final)
 
-## finding indexes of columns containing the string "mean"
+# Finding indexes of all the columns containing the string "mean".
 mean_colnames <- colnames_data_final[grep("mean", colnames_data_final, ignore.case = TRUE)]
 
-## finding indexes of columns containing the string "std"
+# Finding indexes of columns containing the string "std".
 std_colnames <- colnames_data_final[grep("std", colnames_data_final, ignore.case = TRUE)]
 
-## saving only subject ids, activity ids, columns containing means and std in one table
-data_final_mean_std <- data_final[,c("subject_id","activity_id", mean_colnames, std_colnames)]
+# Saving only subject ids, activity ids, columns containing means and std in one table.
+data_final_mean_std <- data_final[,c("subject_ids","activity_ids", mean_colnames, std_colnames)]
 
-# Using the labels from the activity_labels table to build descriptive labels in the data_final_mean_std table
-easy_data <- merge(activities, data_final_mean_std, by.x="activity_ids", by.y="activity_id", all=TRUE)
+###################################################
+## Adding descriptive labels to activitie column ##
+###################################################
 
-##Melt the dataset with the descriptive activity names for better handling
-averaged_data <- melt(easy_data,id=c("activity_ids","activity_labels","subject_id"))
+# Using the labels from the activity_labels table to build descriptive labels in the data_final_mean_std table.
+easy_data <- merge(activities, data_final_mean_std, by.x="activity_ids", by.y="activity_ids", all=TRUE)
 
-#Averaging data
-averaged_data <- dcast(averaged_data, activity_ids + activity_labels + subject_id ~ variable, mean)
+############################################
+## Melting dataset to create narrow data. ##
+############################################
 
-# Create a file with the new tidy dataset
-write.table(averaged_data,"./tidy_movement_data.txt")
+# Melt the dataset with the descriptive activity names
+melted_data <- melt(easy_data,id=c("activity_ids","activity_labels","subject_ids"))
+
+####################
+## Averaging data ##
+####################
+
+averaged_data <- dcast(melted_data, activity_ids + activity_labels + subject_ids ~ variable, mean)
+
+################################################
+## Cleaning out exess dots in variable names. ##
+################################################
+
+tidy_data_colnames <- gsub("\\.", "", names(averaged_data))
+names(averaged_data) <- tidy_data_colnames
+tidy_data <- averaged_data
+
+##############################################
+## Writing the tidy dataset into a new file ##
+##############################################
+
+write.table(tidy_data,"./tidy_data.txt")
+
 
 
