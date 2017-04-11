@@ -1,4 +1,4 @@
-# Coursera Data Cleaning Project: run_analysis.R Script explained
+# Coursera Data Cleaning Project: the "run_analysis.R" Script explained
 by Elisabeth Pelikan
 
 This repository was produced for a course assignment during the “Getting and Cleaning Data” course by Jeff Leek, Roger D. Peng and Brian Caffo from Johns Hopkins University and distributed on the learning platform coursera.com.
