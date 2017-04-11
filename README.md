@@ -31,9 +31,11 @@ The goal of the run_analysis.R script is to produce a tidy data set which can be
 * First all the text-files are read into individual tables.
 * The test-data and the train-data where then merged into two seperate tables and labeled accordingly (the text-files “activity_labels.txt” and “features.txt” where used to label activities and features).
 * When all the text-files are read in they are combined into one big data set.
-* Using the "grep" function, all the columns containing “mean” and “std” strings were extracted and put into a new data table, including only the "activity_ids", the "subject_id" and the “mean” and “std” columns.
+* Using the "grep" function, all the columns containing “mean” and “std” strings were extracted and put into a new data table, including only the "activity_ids", the "subject_ids" and the “mean” and “std” columns.
 * Using the labels from the activity_labels table, descriptive labels in the data_final_mean_std table are build and saved in a new table (easy_table).
-* Lastly, with the help of the "melt" and "dcast" functions of the "reshape2" package, the data is converted into a table containing mean values of all the included features, ordered by the activity name and the subject id, and the data is written to the "tidy_movement_data.txt" file.
+* Using the "melt" function of the "reshape2" package the data is converted into a narrow table.
+* Using the "dcast" function of the "reshape2" package the data is averaged (mean and standard deviation) 
+* Finally the data is written to the "tidy_data.txt" file.
 
 A description of the "tidy_movement_data.txt" file may be found in the "CodeBook.md" file.
 
