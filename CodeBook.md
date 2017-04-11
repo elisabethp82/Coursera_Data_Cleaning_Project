@@ -17,7 +17,7 @@ It was processed using RStudio Version 1.0.136. The final tidy data set can be f
 ## Description of run_analysis.R
 
 __Attention!__ 
-For the code to work properly the data files have to be downloaded and unziped and the working directory has to be set to the file where the unzipped textfiles are stored!
+For the code to work properly the data files have to be downloaded and unziped and the working directory has to be set to the location where the unzipped textfiles are stored!
 
 The goal of the run_analysis.R script is to produce a tidy data set which can be used for further analysis. It therefore reads in data from a number of given .txt files and merges the resulting tables into one big data table.
 * First all the text-files (test data and training data) are read into individual tables.
@@ -27,6 +27,7 @@ The goal of the run_analysis.R script is to produce a tidy data set which can be
 * Using the labels from the activity_labels table, descriptive labels in the data_final_mean_std table are build and saved in a new table (easy_table).
 * Using the "melt" function of the "reshape2" package the data is converted into a narrow table.
 * Using the "dcast" function of the "reshape2" package the data is averaged (mean and standard deviation) 
+* In the averaged_data the unnecessary dots are removed from the column names are cleaned up, resulting in tidy_data.
 * Finally the data is written to the "tidy_data.txt" file.
 
 ## Description of the "tidy_data.txt" file
