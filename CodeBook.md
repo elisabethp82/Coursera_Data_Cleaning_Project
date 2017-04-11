@@ -33,14 +33,17 @@ The goal of the run_analysis.R script is to produce a tidy data set which can be
 The final tidy data file contains the following variables:
 
 ## Identifiers
-* subject_ids --> 
-* activity_ids  --> 
-* activity_labels --> 
+* subject_ids --> ID of the test subject
+* activity_ids  --> IDs of the type of activity that was performed by the subject during the experiment
+* activity_labels --> Label of the activity
+    (1) WALKING 
+    (2) WALKING_UPSTAIRS
+    (3) WALKING_DOWNSTAIRS
+    (4) SITTING (value 4)
+    (5) STANDING (value 5)
+    (6) LAYING (value 6)
 
 ## Measurments
-* activity_ids
-* activity_labels
-* subject_ids
 * tBodyAccmeanX
 * tBodyAccmeanY
 * tBodyAccmeanZ
