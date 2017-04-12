@@ -17,11 +17,11 @@ It was processed using RStudio Version 1.0.136. The final tidy data set can be f
 ## Description of run_analysis.R
 
 __Attention!__ 
-For the code to work properly the data files have to be downloaded and unziped and the working directory has to be set to the location where the unzipped textfiles are stored!
+For the code to work properly the data files have to be downloaded and unziped and the working directory has to be set to the subdirectory "UCI HAR Dataset" at the location of the extracted zip file where the unzipped textfiles are stored!
 
 The goal of the run_analysis.R script is to produce a tidy data set which can be used for further analysis. It therefore reads in data from a number of given .txt files and merges the resulting tables into one big data table.
 * First all the text-files (test data and training data) are read into individual tables.
-* The test-data and the training-data where then merged into two seperate tables and labeled accordingly (the text-files “activity_labels.txt” and “features.txt” where used to label activities and features).
+* The test-data and the training-data were then merged into two seperate tables ("test_data_final" and "train_data_final") and labeled accordingly (the text-files “activity_labels.txt” and “features.txt” where used to label activities and features).
 * When all the text-files are read in they are combined into one big data set.
 * Using the "grep" function, all the columns containing “mean” and “std” strings were extracted and put into a new data table, including only the "activity_ids", the "subject_ids" and the “mean” and “std” columns.
 * Using the labels from the activity_labels table, descriptive labels in the data_final_mean_std table are build and saved in a new table (easy_table).
