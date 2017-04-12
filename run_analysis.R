@@ -100,7 +100,7 @@ tidy_data <- averaged_data
 ## Writing the tidy dataset into a new file ##
 ##############################################
 
-write.table(tidy_data,"./tidy_data.txt")
+write.table(tidy_data,"./tidy_data.txt", row.names = FALSE)
 
 
 
